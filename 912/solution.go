@@ -21,6 +21,9 @@ func SortArray(nums []int) []int {
 	if len(nums) <= 1 {
 		return nums
 	}
+	quickSort(nums, 0, len(nums)-1)
+	return nums
+}
 
 	mid := len(nums) / 2
 	left := sortArray(nums[:mid])
@@ -48,4 +51,27 @@ func merge(left, right []int) []int {
 	result = append(result, right[r:]...)
 
 	return result
+}
+
+func quickSort(arr []int, s, e int) {
+	if e <= s {
+		return
+	}
+
+	left := s
+	pivot := arr[e]
+
+	for i := s; i < e; i++ {
+		if arr[i] < pivot {
+			temp := arr[left]
+			arr[left] = arr[i]
+			arr[i] = temp
+			left++
+		}
+	}
+
+	arr[left], arr[e] = arr[e], arr[left]
+
+	quickSort(arr, s, left-1)
+	quickSort(arr, left+1, e)
 }
