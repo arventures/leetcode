@@ -1,10 +1,10 @@
-name: Testing Workflow
-on: workflow_dispatch
+name: Test workflow
+on: push
 jobs:
-  test-job:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Print greeting
-        run: echo "My first github action"
-      - name: Print Goodbye
-        run: echo "Goodbye"
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Print sha
+        run: echo ${{ github.sha }}
