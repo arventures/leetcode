@@ -1,41 +1,43 @@
 package _450
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func DeleteNode(root *TreeNode, key int) *TreeNode {
+
 	if root == nil {
-		return root
+		return nil
 	}
 
 	if key < root.Val {
-		root.Left = deleteNode(root.Left, key)
+		root.Left = DeleteNode(root.Left, key)
 	} else if key > root.Val {
-		root.Right = deleteNode(root.Right, key)
+		root.Right = DeleteNode(root.Right, key)
 	} else {
-		if root.Right == nil {
-			return root.Left
-		}
-		if root.Left == nil {
+		if root.Left == nil && root.Right == nil {
+			return nil
+		} else if root.Left == nil {
 			return root.Right
+		} else if root.Right == nil {
+			return root.Left
+		} else {
+			//Case where node has two nodes
+			minNode := MinNode(root.Right)
+			root.Val = minNode.Val
+			root.Right = DeleteNode(root.Right, minNode.Val)
+
 		}
-
-		cur := root.Right
-
-		for cur.Left != nil {
-			cur = cur.Left
-		}
-
-		root.Val = cur.Val
-
-		root.Right = deleteNode(root.Right, cur.Val)
-
 	}
-
 	return root
+}
+
+func MinNode(root *TreeNode) *TreeNode {
+	if root.Left == nil {
+		return root
+	} else {
+		return MinNode(root.Left)
+	}
 }
