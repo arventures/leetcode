@@ -3,7 +3,7 @@ package _994
 func orangesRotting(grid [][]int) int {
 
 	var directions = [][2]int{
-		{-1, 0}, {1, 0}, {0, -1}, {0, 1}
+		{-1, 0}, {1, 0}, {0, -1}, {0, 1},
 	}
 
 	rows, cols := len(grid), len(grid[0])
@@ -32,7 +32,7 @@ func orangesRotting(grid [][]int) int {
 				nr, nc := r+d[0], c+d[1]
 
 				if nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] == 1 {
-					grid[nr][nc] == 2
+					grid[nr][nc] = 2
 					freshOranges--
 					newQueue = append(newQueue, []int{nr, nc})
 				}
@@ -51,6 +51,5 @@ func orangesRotting(grid [][]int) int {
 	}
 
 	return minutes
-
 
 }
