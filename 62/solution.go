@@ -7,7 +7,7 @@ func uniquePaths(r int, c int) int {
 		row[i] = 1
 	}
 
-	for i := r - 1; i >=0 0; i-- {
+	for i := r - 1; i >= 0; i-- {
 		newRow := make([]int, c)
 		newRow[c-1] = 1
 
